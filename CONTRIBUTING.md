@@ -58,6 +58,16 @@ postbot-sdk/
   └── dist/                 构建产物（不提交）
 ```
 
+### 提交信息
+
+提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/)，
+发布由 release-please 自动生成版本号、CHANGELOG 和 tag：
+
+- `fix:` → patch，`feat:` → minor，`feat!:` / `BREAKING CHANGE:` → major
+- `chore:` / `ci:` / `docs:` / `test:` 不触发发布
+
+不要手动修改 `package.json` 的 `version` 或 `CHANGELOG.md`，详见 [RELEASING.md](RELEASING.md)。
+
 ### 代码规范
 
 - 使用 TypeScript，严格模式，禁止引入不必要的运行时依赖。

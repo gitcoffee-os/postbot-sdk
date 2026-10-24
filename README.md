@@ -12,8 +12,8 @@
   <a href="https://github.com/gitcoffee-os/postbot-sdk/blob/main/LICENSE" style="display:inline-block;margin:5px;">
     <img src="https://img.shields.io/github/license/gitcoffee-os/postbot-sdk.svg" alt="License">
   </a>
-  <a href="https://www.npmjs.com/package/@gitcoffee/postbot-sdk" style="display:inline-block;margin:5px;">
-    <img src="https://img.shields.io/npm/v/@gitcoffee/postbot-sdk.svg" alt="npm version">
+  <a href="https://www.npmjs.com/package/@gitcoffee-os/postbot-sdk" style="display:inline-block;margin:5px;">
+    <img src="https://img.shields.io/npm/v/@gitcoffee-os/postbot-sdk.svg" alt="npm version">
   </a>
 </p>
 
@@ -43,10 +43,10 @@
 
 ```bash
 # npm
-npm install @gitcoffee/postbot-sdk
+npm install @gitcoffee-os/postbot-sdk
 
 # pnpm
-pnpm add @gitcoffee/postbot-sdk
+pnpm add @gitcoffee-os/postbot-sdk
 ```
 
 要求 Node.js >= 18，包为纯 ESM。
@@ -54,7 +54,7 @@ pnpm add @gitcoffee/postbot-sdk
 ## 快速开始
 
 ```ts
-import { PostbotClient, TaskApi } from '@gitcoffee/postbot-sdk';
+import { PostbotClient, TaskApi } from '@gitcoffee-os/postbot-sdk';
 
 const client = new PostbotClient({
   baseUrl: 'https://your-postbot-host', // 你的 PostBot 服务地址
@@ -106,7 +106,7 @@ client.setToken('new-token'); // 登录后更新 Token
 ### 获取用户 Token
 
 ```ts
-import { PostbotClient, directLogin } from '@gitcoffee/postbot-sdk';
+import { PostbotClient, directLogin } from '@gitcoffee-os/postbot-sdk';
 
 const { access_token, expires_in } = await directLogin(baseUrl, username, password);
 
@@ -121,7 +121,7 @@ import {
   proxyLogin,
   proxyRegister,
   proxyForgotPassword,
-} from '@gitcoffee/postbot-sdk';
+} from '@gitcoffee-os/postbot-sdk';
 
 const appAccessToken = await getAppToken(iamBaseUrl, clientId, clientSecret);
 
@@ -143,7 +143,7 @@ client.setToken(result.token);
 ### 当前用户
 
 ```ts
-import { getUserInfo } from '@gitcoffee/postbot-sdk';
+import { getUserInfo } from '@gitcoffee-os/postbot-sdk';
 
 const user = await getUserInfo(iamBaseUrl, token, appId);
 console.log(user.preferred_username ?? user.username);
@@ -167,7 +167,7 @@ console.log(user.preferred_username ?? user.username);
 ### 任务
 
 ```ts
-import { TaskApi } from '@gitcoffee/postbot-sdk';
+import { TaskApi } from '@gitcoffee-os/postbot-sdk';
 
 const tasks = new TaskApi(client);
 
@@ -182,7 +182,7 @@ await tasks.batchDelete([123, 124]);
 ### 发布调度
 
 ```ts
-import { AutoPublishApi } from '@gitcoffee/postbot-sdk';
+import { AutoPublishApi } from '@gitcoffee-os/postbot-sdk';
 
 const autoPublish = new AutoPublishApi(client);
 
@@ -195,7 +195,7 @@ const logs = await autoPublish.listLogs({ taskId: 123, limit: 20 });
 ### 工作流
 
 ```ts
-import { WorkflowApi } from '@gitcoffee/postbot-sdk';
+import { WorkflowApi } from '@gitcoffee-os/postbot-sdk';
 
 const workflow = new WorkflowApi(client);
 
@@ -208,7 +208,7 @@ const definitions = await workflow.listDefinitions();
 ### 账号与指纹
 
 ```ts
-import { AccountApi, FingerprintApi } from '@gitcoffee/postbot-sdk';
+import { AccountApi, FingerprintApi } from '@gitcoffee-os/postbot-sdk';
 
 const accounts = new AccountApi(client);
 const account = await accounts.get(9);
@@ -231,7 +231,7 @@ await fingerprints.remove(account.id);
 ### 通知
 
 ```ts
-import { NotifyApi } from '@gitcoffee/postbot-sdk';
+import { NotifyApi } from '@gitcoffee-os/postbot-sdk';
 
 await new NotifyApi(client).send(
   { event: 'userProxyRenewal', info: { userId: 1 } },
@@ -244,7 +244,7 @@ await new NotifyApi(client).send(
 后端可能以 HTTP 200 + 业务码返回失败，SDK 会统一转换为 `IamApiError`：
 
 ```ts
-import { IamApiError } from '@gitcoffee/postbot-sdk';
+import { IamApiError } from '@gitcoffee-os/postbot-sdk';
 
 try {
   await tasks.get(123);
@@ -262,7 +262,7 @@ try {
 自定义传输层可复用底层工具：
 
 ```ts
-import { isSuccessCode, toApiError } from '@gitcoffee/postbot-sdk';
+import { isSuccessCode, toApiError } from '@gitcoffee-os/postbot-sdk';
 
 if (!isSuccessCode(body.code)) {
   throw toApiError(body, status);

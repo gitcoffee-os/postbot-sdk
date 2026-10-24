@@ -1,5 +1,5 @@
 {
-  "name": "@gitcoffee/postbot-sdk",
+  "name": "@gitcoffee-os/postbot-sdk",
   "version": "1.0.0",
   "description": "PostBot & Postar SDK - API client, auth, and domain models for content publishing",
   "type": "module",
