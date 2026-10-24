@@ -97,7 +97,7 @@ jobs:
         if: steps.meta.outputs.published == 'false'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+        run: npm publish --provenance --access public
 
       - name: Ensure tag and GitHub Release exist (bootstrap)
         if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
